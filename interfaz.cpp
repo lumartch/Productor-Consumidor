@@ -27,7 +27,7 @@ void Interfaz::pantallaPrincipal() {
 void Interfaz::turnoAleatorio() {
     while(true){
         cout << "\033[4;28H          " << endl;
-        int turno = rand() % 10;
+        int turno = rand() % 21;
         if(turno % 2){
             cout << "\033[4;28HProductor" << endl;
             sleep(1);
@@ -43,10 +43,13 @@ void Interfaz::turnoAleatorio() {
 
 void Interfaz::productor() {
     if(cola.size() == 32){
-        cout << "\033[4;67HEsperando" << endl;
+        cout << "\033[4;67H           " << endl;
+        cout << "\033[4;67HLleno" << endl;
         return;
     }
     cout << "\033[4;67HProduciendo" << endl;
+    cout << "\033[4;104H           " << endl;
+    cout << "\033[4;104HEsperando" << endl;
     for(int i = 0; i < 4; i++, prodCont++){
         if(prodCont == 32){
             prodCont = 0;
@@ -57,14 +60,18 @@ void Interfaz::productor() {
     }
     cout << "\033[4;67H           " << endl;
     cout << "\033[4;67HEsperando" << endl;
+    sleep(1);
 }
 
 void Interfaz::consumidor() {
     if(cola.empty()){
-        cout << "\033[4;104HEsperando" << endl;
+        cout << "\033[4;104H           " << endl;
+        cout << "\033[4;104HVacio" << endl;
         return;
     }
     cout << "\033[4;104HConsumiendo" << endl;
+    cout << "\033[4;67H           " << endl;
+    cout << "\033[4;67HEsperando" << endl;
     for(int i = 0; i < 4; i++, conCont++){
         if(conCont == 32){
             conCont = 0;
@@ -75,4 +82,5 @@ void Interfaz::consumidor() {
     }
     cout << "\033[4;104H           " << endl;
     cout << "\033[4;104HEsperando" << endl;
+    sleep(1);
 }
