@@ -1,0 +1,22 @@
+# depslib dependency file v1.0
+1553708590 source:/home/lumartch/Productor_Consumidor/consumidor.cpp
+	"consumidor.h"
+
+1553708590 /home/lumartch/Productor_Consumidor/consumidor.h
+
+1553708643 source:/home/lumartch/Productor_Consumidor/main.cpp
+	"interfaz.h"
+
+1553711828 /home/lumartch/Productor_Consumidor/interfaz.h
+	<iostream>
+	<unistd.h>
+	<queue>
+
+1553708575 /home/lumartch/Productor_Consumidor/productor.h
+
+1553708575 source:/home/lumartch/Productor_Consumidor/productor.cpp
+	"productor.h"
+
+1553712569 source:/home/lumartch/Productor_Consumidor/interfaz.cpp
+	"interfaz.h"
+

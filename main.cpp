@@ -1,8 +1,6 @@
-#include <iostream>
-
-using namespace std;
+#include "interfaz.h"
 
 int main() {
-    cout << "Hello world!" << endl;
+    new Interfaz;
     return 0;
 }
