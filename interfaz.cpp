@@ -25,34 +25,44 @@ void Interfaz::pantallaPrincipal() {
 }
 
 void Interfaz::turnoAleatorio() {
-    while(true){
+    int ch = 0;
+    while(ch != 27){
+        ch = kbhit();
+        if(ch == 27){
+            break;
+        }
         cout << "\033[4;28H          " << endl;
         int turno = rand() % 21;
         if(turno % 2){
             cout << "\033[4;28HProductor" << endl;
             sleep(1);
-            productor();
+            ch = productor();
         }
         else{
             cout << "\033[4;28HConsumidor" << endl;
             sleep(1);
-            consumidor();
+            ch = consumidor();
         }
     }
 }
 
-void Interfaz::productor() {
+int Interfaz::productor() {
     if(cola.size() == 32){
         cout << "\033[4;67H           " << endl;
         cout << "\033[4;67HLleno" << endl;
-        return;
+        return 0;
     }
     cout << "\033[4;67HProduciendo" << endl;
     cout << "\033[4;104H           " << endl;
     cout << "\033[4;104HEsperando" << endl;
+    int ch = kbhit();
     for(int i = 0; i < 4; i++, prodCont++){
         if(prodCont == 32){
             prodCont = 0;
+        }
+        ch = kbhit();
+        if(ch == 27){
+            break;
         }
         cout << "\033[8;" << (prodCont*4) + 3 << "H*" << endl;
         cola.push(1);
@@ -61,20 +71,26 @@ void Interfaz::productor() {
     cout << "\033[4;67H           " << endl;
     cout << "\033[4;67HEsperando" << endl;
     sleep(1);
+    return ch;
 }
 
-void Interfaz::consumidor() {
+int Interfaz::consumidor() {
     if(cola.empty()){
         cout << "\033[4;104H           " << endl;
         cout << "\033[4;104HVacio" << endl;
-        return;
+        return 0;
     }
     cout << "\033[4;104HConsumiendo" << endl;
     cout << "\033[4;67H           " << endl;
     cout << "\033[4;67HEsperando" << endl;
+    int ch = kbhit();
     for(int i = 0; i < 4; i++, conCont++){
         if(conCont == 32){
             conCont = 0;
+        }
+        ch = kbhit();
+        if(ch == 27){
+            break;
         }
         cout << "\033[8;" << (conCont*4) + 3 << "H " << endl;
         cola.pop();
@@ -83,4 +99,24 @@ void Interfaz::consumidor() {
     cout << "\033[4;104H           " << endl;
     cout << "\033[4;104HEsperando" << endl;
     sleep(1);
+    return ch;
+}
+
+int Interfaz::kbhit(void) {
+    struct termios oldt, newt;
+    int ch;
+    int oldf;
+    tcgetattr(STDIN_FILENO, &oldt);
+    newt = oldt;
+    newt.c_lflag &= ~(ICANON | ECHO);
+    tcsetattr(STDIN_FILENO, TCSANOW, &newt);
+    oldf = fcntl(STDIN_FILENO, F_GETFL, 0);
+    fcntl(STDIN_FILENO, F_SETFL, oldf | O_NONBLOCK);
+    ch = getchar();
+    if(ch != EOF) {
+        while (getchar() != EOF);
+        return ch;
+    }
+    while (getchar() != EOF);
+    return 0;
 }

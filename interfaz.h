@@ -4,6 +4,11 @@
 #include <iostream>
 #include <unistd.h>
 #include <queue>
+/* Librerías necesarias para el funcionamiento de kbhit */
+#include <termios.h>
+#include <cstdlib>
+#include <cstdio>
+#include <fcntl.h>
 
 using namespace std;
 
@@ -17,8 +22,9 @@ private:
     int prodCont;
     int conCont;
     void turnoAleatorio();
-    void productor();
-    void consumidor();
+    int productor();
+    int consumidor();
+    int kbhit(void);
 };
 
 #endif // INTERFAZ_H

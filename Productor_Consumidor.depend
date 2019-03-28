@@ -20,3 +20,18 @@
 1553712569 source:/home/lumartch/Productor_Consumidor/interfaz.cpp
 	"interfaz.h"
 
+1553765723 source:/home/lumartch/Productor-Consumidor/interfaz.cpp
+	"interfaz.h"
+
+1553765541 /home/lumartch/Productor-Consumidor/interfaz.h
+	<iostream>
+	<unistd.h>
+	<queue>
+	<termios.h>
+	<cstdlib>
+	<cstdio>
+	<fcntl.h>
+
+1553706377 source:/home/lumartch/Productor-Consumidor/main.cpp
+	"interfaz.h"
+
